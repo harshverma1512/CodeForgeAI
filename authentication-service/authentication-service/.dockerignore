@@ -1,0 +1,10 @@
+.gradle
+.kotlin
+build
+out
+.idea
+*.iml
+*.log
+postman
+k8s
+README-Docker-Kubernetes.md

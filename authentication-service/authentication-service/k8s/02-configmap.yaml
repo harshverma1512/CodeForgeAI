@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-service-config
+  namespace: codeforge
+data:
+  SPRING_PROFILES_ACTIVE: postgres
+  AUTH_DATASOURCE_URL: jdbc:postgresql://postgres:5432/codeforge_auth
+  AUTH_REDIS_HOST: redis
+  AUTH_REDIS_PORT: "6379"
+  AUTH_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  AUTH_JPA_DDL_AUTO: update
