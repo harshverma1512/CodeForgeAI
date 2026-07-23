@@ -13,7 +13,7 @@ data class AuthProperties(
 ) {
     data class Jwt(
         val secret: String = "change-me-change-me-change-me-change-me",
-        val accessTokenTtl: Duration = Duration.ofMinutes(15),
+        val accessTokenTtl: Duration = Duration.ofMinutes(60),
         val refreshTokenTtl: Duration = Duration.ofDays(30),
     )
 

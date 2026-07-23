@@ -1,6 +1,5 @@
 package com.codeforge.authentication_service.service
 
-import com.codeforge.authentication_service.security.TokenService
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
 import java.time.Clock

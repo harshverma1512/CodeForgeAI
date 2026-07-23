@@ -20,8 +20,10 @@ class JwtAuthenticationFilter(
         response: HttpServletResponse,
         filterChain: FilterChain,
     ) {
+
         val authorization = request.getHeader("Authorization")
-        if (authorization?.startsWith("Bearer ", ignoreCase = true) == true) {
+        println("Authorization Header: $authorization")
+        if (authorization?.startsWith("Bearer", ignoreCase = true) == true) {
             val token = authorization.removePrefix("Bearer ").trim()
             try {
                 val claims = tokenService.parseAndValidate(token)
@@ -35,7 +37,8 @@ class JwtAuthenticationFilter(
                     val authentication = UsernamePasswordAuthenticationToken(principal, null, authorities)
                     SecurityContextHolder.getContext().authentication = authentication
                 }
-            } catch (_: Exception) {
+            } catch (ex: Exception) {
+                print("Invalid token: ${ex.message}")
                 SecurityContextHolder.clearContext()
             }
         }

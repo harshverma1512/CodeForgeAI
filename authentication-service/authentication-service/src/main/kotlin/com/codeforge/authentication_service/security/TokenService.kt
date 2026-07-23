@@ -59,12 +59,18 @@ class TokenService(
     }
 
     fun parseClaims(rawToken: String): Claims =
-        Jwts.parser()
-            .verifyWith(key)
-            .requireIssuer(authProperties.issuer)
-            .build()
-            .parseSignedClaims(rawToken)
-            .payload
+        try {
+            Jwts.parser()
+                .verifyWith(key)
+                .requireIssuer(authProperties.issuer)
+                .build()
+                .parseSignedClaims(rawToken)
+                .payload
+        } catch (e: Exception) {
+            print("Token parsing error: ${e.message}\n")
+            println("Exception Type: ${e::class.qualifiedName}")
+            throw     UnauthorizedException("Invalid token")
+        }
 
     fun hashToken(token: String): String = token.toByteArray(StandardCharsets.UTF_8).let { bytes ->
         java.security.MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }
